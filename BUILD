@@ -26,8 +26,9 @@ cc_library(
 
 cc_library(
     name = "colormap",
+    srcs = ["colormap.cc"],
     hdrs = ["colormap.h"],
-    deps = [],
+    deps = ["@com_google_absl//absl/strings"],
 )
 
 cc_binary(
