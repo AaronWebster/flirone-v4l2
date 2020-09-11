@@ -19,26 +19,30 @@ licenses(["notice"])  # Apache 2.0
 load("@com_google_emboss//:build_defs.bzl", "emboss_cc_library")
 
 cc_library(
-    name = "rcon",
-    srcs = ["rcon.cc"],
-    hdrs = ["rcon.h"],
-    deps = [
-        ":packet",
-        "@com_google_absl//absl/base",
-        "@com_google_absl//absl/flags:flag",
-        "@com_google_absl//absl/flags:parse",
-        "@com_google_absl//absl/memory",
-        "@com_google_absl//absl/random",
-        "@com_google_absl//absl/strings",
-    ],
+    name = "font5x7",
+    hdrs = ["font5x7.h"],
+    deps = [],
+)
+
+cc_library(
+    name = "colormap",
+    hdrs = ["colormap.h"],
+    deps = [],
 )
 
 cc_binary(
-    name = "minecraft_rcon",
-    srcs = ["main.cc"],
+    name = "flirone",
+    srcs = ["flirone.cc"],
+    copts = [
+        "-I/usr/include/libusb-1.0",
+    ],
+    linkopts = [
+        "-lusb-1.0",
+        "-lm",
+    ],
     deps = [
-        ":packet",
-        ":rcon",
+        ":colormap",
+        ":font5x7",
         "@com_google_absl//absl/base",
         "@com_google_absl//absl/flags:flag",
         "@com_google_absl//absl/flags:parse",
@@ -46,7 +50,7 @@ cc_binary(
     ],
 )
 
-emboss_cc_library(
-    name = "packet",
-    srcs = ["packet.emb"],
-)
+# emboss_cc_library(
+#     name = "packet",
+#     srcs = ["packet.emb"],
+# )
